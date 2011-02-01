@@ -4,7 +4,7 @@ use Net::Netmask;
 use Net::Netmask qw(sameblock cmpblocks);
 use Carp;
 use Carp qw(verbose);
-use Test::More tests => 290;
+use Test::More tests => 295;
 
 #  addr			mask		base		newmask	     bits  mb
 my @rtests = qw(
@@ -581,3 +581,20 @@ ok(! defined(findNetblock("10.2.1.0", $table77)));
 	ok(@leftover == 1);
 	ok("$leftover[0]" eq '1.0.0.5/32');
 }
+
+{
+	my $obj1 = new2 Net::Netmask ('217.173.192.0/21');
+	my $obj2 = new2 Net::Netmask ('217.173.200.0/21');
+	is("$obj1", '217.173.192.0/21');
+	is("$obj2", '217.173.200.0/21');
+	ok(! $obj1->contains($obj2));
+	ok(! $obj2->contains($obj1));
+}
+
+{
+	my $warnings = '';
+	local($SIG{__WARN__}) = sub { $warnings = $_[0] };
+	my $block = findNetblock("127.0.0.", { 1 => []});
+	is($warnings, '');
+}
+

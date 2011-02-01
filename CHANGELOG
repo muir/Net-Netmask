@@ -1,4 +1,8 @@
 
+= 2011/03/22 1.9016
+
+Fix bug #46996: warnings issued for bad input.
+Fix bug #43348: use POSIX::floor() instead of int()
 Rewrite netmask.t to use Test::More
 
 = 2006/11/30 1.9015

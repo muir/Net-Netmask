@@ -3,7 +3,7 @@
 package Net::Netmask;
 
 use vars qw($VERSION);
-$VERSION = 1.9015;
+$VERSION = 1.9016;
 
 require Exporter;
 @ISA = qw(Exporter);
@@ -28,6 +28,7 @@ $debug = 1;
 use strict;
 use warnings;
 use Carp;
+use POSIX qw(floor);
 use overload
 	'""' => \&desc,
 	'<=>' => \&cmp_net_netmask_block,
@@ -220,7 +221,7 @@ sub inaddr
 {
 	my ($this) = @_;
 	my $ibase = $this->{'IBASE'};
-	my $blocks = int($this->size()/256);
+	my $blocks = floor($this->size()/256);
 	return (join('.',unpack('xC3', pack('V', $ibase))).".in-addr.arpa",
 		$ibase%256, $ibase%256+$this->size()-1) if $blocks == 0;
 	my @ary;
@@ -297,6 +298,7 @@ sub findNetblock
 	$t = $remembered unless $t;
 
 	my $ip = quad2int($ipquad);
+	return unless defined $ip;
 	my %done;
 
 	for (my $b = 32; $b >= 0; $b--) {
@@ -462,7 +464,7 @@ sub irange2cidrlist
 	my @result;
 	while ($end >= $start) {
 		my $maxsize = imaxblock($start, 32);
-		my $maxdiff = 32 - int(log($end - $start + 1)/log(2));
+		my $maxdiff = 32 - floor(log($end - $start + 1)/log(2));
 		$maxsize = $maxdiff if $maxsize < $maxdiff;
 		push (@result, bless {
 			'IBASE' => $start,

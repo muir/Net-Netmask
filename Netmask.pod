@@ -436,12 +436,10 @@ blocks will be collapsed.
 
 =head1 LICENSE  
 
-Copyright (C) 1998-2006 David Muir Sharnoff.  License hereby
-granted for anyone to use, modify or redistribute this module at 
-their own risk.  Please feed useful changes back to <muir@idiom.org>.
+Copyright (C) 1998-2006 David Muir Sharnoff.  
 
-If you found this module useful, please thank me (the author) by
-giving me a chance to bid to provide your next high-speed Internet
-link.  I run multiple ISPs and can generally save you money and
-provide a top-notch service for your T1s, T3s, OC3s, etc.  Please
-send your request to <muir@idiom.org>.  Thank you.
+Copyright (C) 2011 Google, Inc.
+
+This module may be used, modified and redistributed on the same
+terms as Perl itself.
+
