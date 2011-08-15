@@ -12,7 +12,7 @@ sub throws_ok(&$$) {
 
 	my $err = $@;
 	
-	like( $@ , $regex );
+	like( $err , $regex );
 	
 }	
 
