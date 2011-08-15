@@ -45,6 +45,14 @@ throws_ok
 	qr/^Netmask only contains 1 IPs. Cannot split into 2./ ,
 	"32 cannot be split";
 
-is ( $cidr30->split( 4 ) , map { make_nm( "10.0.0.$_" ) } ( 0 .. 3 ) );
+is 
+	$cidr24->split( 2 ) , 
+	map( { make_nm( "10.0.0.$_" . "/25" ) } ( 0 , 128 ) ),
+	'Can split /24 into 2 25s'
+;
 
-is ( $cidr24->split( 256 ) , map { make_nm "10.0.0.$_" } ( 0..255 ) );
+is 
+	$cidr24->split( 256 ) , 
+	map( { make_nm "10.0.0.$_" } ( 0..255 ) ) ,
+	'Can split into 32s (i.e $parts = $self->size)'
+;
