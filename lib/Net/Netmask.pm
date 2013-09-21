@@ -592,7 +592,8 @@ sub sort_by_ip_address
 }
 
 
-sub split {
+sub split
+{
 	my ($self , $parts) = @_;
 
 	my $num_ips = $self->size;
@@ -610,10 +611,10 @@ sub split {
 
 	my $new_mask = $self->bits + $log2;
       
-	map { Net::Netmask->new( $_ . "/" .  $new_mask ) }
-	map { $self->nth( ( $num_ips / $parts ) * $_ ) } 
-	( 0 .. ( $parts - 1 ) );
-
+	return 
+		map { Net::Netmask->new( $_ . "/" .  $new_mask ) }
+			map { $self->nth( ( $num_ips / $parts ) * $_ ) } 
+				( 0 .. ( $parts - 1 ) );
 }
 
 BEGIN {
