@@ -1,5 +1,5 @@
-Netmask.pm
-Netmask.pod
+lib/Net/Netmask.pm
+lib/Net/Netmask.pod
 Makefile.PL
 MANIFEST
 README

@@ -1,4 +1,4 @@
-#!/usr/bin/perl -I. -w
+#!/usr/bin/perl -w
 
 BEGIN { $| = 1; print "1..28\n";}
 use Net::Netmask;

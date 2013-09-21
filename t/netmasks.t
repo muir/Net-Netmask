@@ -1,4 +1,4 @@
-#!/usr/bin/perl -I. -w
+#!/usr/bin/perl -w
 
 use Net::Netmask;
 use Net::Netmask qw(sameblock cmpblocks);
@@ -597,4 +597,5 @@ ok(! defined(findNetblock("10.2.1.0", $table77)));
 	my $block = findNetblock("127.0.0.", { 1 => []});
 	is($warnings, '');
 }
+
 

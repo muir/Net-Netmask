@@ -5,11 +5,22 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
 	'NAME' => 'Net::Netmask',
 	'DISTNAME' => 'Net-Netmask',
-	'VERSION_FROM' => 'Netmask.pm',
-	($] >= 5.005 ?
-	    ('ABSTRACT' => 'Understand and manipulate IP netmaks',
-	     'AUTHOR'	=> 'David Muir Sharnoff <muir@idiom.org>') : ()),
-	'dist'   => {COMPRESS=>'gzip', SUFFIX=>'gz'}
+	'VERSION_FROM' => 'lib/Net/Netmask.pm',
+	'dist'   => {COMPRESS=>'gzip', SUFFIX=>'gz'},
+	($] >= 5.005 
+		?	
+			(
+				ABSTRACT	=> 'Receive mail via SMTP',
+				ABSTRACT	=> 'Understand and manipulate IP netmaks',
+				AUTHOR		=> 'David Muir Sharnoff <cpan@dave.sharnoff.org>',
+				META_MERGE     => {
+					resources  => {
+						repository => 'http://github.com/muir/Net-Netmask',
+					},
+				},
+			) 
+		: ()
+	),
 );
 
 package MY;
@@ -19,8 +30,9 @@ sub postamble {
 
 pm_to_blib: README
 
-README: Netmask.pod
-\tpod2text Netmask.pod >README
+README: lib/Net/Netmask.pod
+\tpod2text lib/Net/Netmask.pod >README
 
 END_OF_POSTAMBLE
 }
+

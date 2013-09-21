@@ -1,4 +1,4 @@
-#!/usr/bin/perl -I. -w
+#!/usr/bin/perl -w
 
 #
 # I've been told at times that this or that sort function is
