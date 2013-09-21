@@ -591,6 +591,31 @@ sub sort_by_ip_address
 
 }
 
+
+sub split {
+	my ($self , $parts) = @_;
+
+	my $num_ips = $self->size;
+
+	confess "Parts must be defined and greater than 0."
+		unless defined( $parts ) && $parts > 0;
+
+	confess "Netmask only contains $num_ips IPs. Cannot split into $parts."
+		unless $num_ips >= $parts; 
+      
+	my $log2 = log($parts) / log(2);
+      
+	confess "Parts count must be a number of base 2. Got: $parts"
+		unless floor($log2) == $log2;
+
+	my $new_mask = $self->bits + $log2;
+      
+	map { Net::Netmask->new( $_ . "/" .  $new_mask ) }
+	map { $self->nth( ( $num_ips / $parts ) * $_ ) } 
+	( 0 .. ( $parts - 1 ) );
+
+}
+
 BEGIN {
 	for (my $i = 0; $i <= 32; $i++) {
 		$imask[$i] = imask($i);

@@ -299,6 +299,15 @@ Tag network blocks with your own data.  The first argument is the
 name of your tag (hash key) and the second argument (if present) is
 the new value.  The old value is returned.
 
+=item ->B<split>($parts)
+
+Splits a netmask into a number of sub netblocks. This number must be 
+a base 2 number (2,4,8,16,etc.) and the number must not exceed the
+number of IPs within this netmask.
+
+e.g Net::Netmask->new( '10.0.0.0/24' )->split(2)
+=> ( Net::Netmask( '10.0.0.0/25') , Net::Netmask( '10.0.0.128/25' ) )
+
 =back
 
 =head1 METHOD/FUNCTION COMBOS
