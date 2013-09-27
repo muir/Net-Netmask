@@ -1,6 +1,10 @@
 
 Revision history for Perl module Net::Netmask
 
+1.9018 2013-09-26
+
+- Minor MANIFEST fix.
+
 1.9017 2013-09-20
 
  - Add network split() function.

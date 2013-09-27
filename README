@@ -393,7 +393,7 @@ FUNCTIONS
 LICENSE
     Copyright (C) 1998-2006 David Muir Sharnoff.
 
-    Copyright (C) 2011 Google, Inc.
+    Copyright (C) 2011-2013 Google, Inc.
 
     This module may be used, modified and redistributed on the same terms as
     Perl itself.

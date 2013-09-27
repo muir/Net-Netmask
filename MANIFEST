@@ -3,7 +3,7 @@ lib/Net/Netmask.pod
 Makefile.PL
 MANIFEST
 README
-CHANGELOG
+Changes
 t/netmasks.t
 t/badnets.t
 t/sortspeed-ip.t
