@@ -3,7 +3,7 @@
 package Net::Netmask;
 
 use vars qw($VERSION);
-$VERSION = 1.9018;
+$VERSION = 1.9019;
 
 require Exporter;
 @ISA = qw(Exporter);
@@ -265,8 +265,8 @@ sub storeNetblock
 	$t->{$base} = [] unless exists $t->{$base};
 
 	my $mb = maxblock($this);
-	my $b = $this->{'BITS'};
-	my $i = $b - $mb;
+	my $bits = $this->{'BITS'};
+	my $i = $bits - $mb;
 
 	$t->{$base}->[$i] = $this;
 }
@@ -279,8 +279,8 @@ sub deleteNetblock
 	my $base = $this->{'IBASE'};
 
 	my $mb = maxblock($this);
-	my $b = $this->{'BITS'};
-	my $i = $b - $mb;
+	my $bits = $this->{'BITS'};
+	my $i = $bits - $mb;
 
 	return unless defined $t->{$base};
 
@@ -301,13 +301,13 @@ sub findNetblock
 	return unless defined $ip;
 	my %done;
 
-	for (my $b = 32; $b >= 0; $b--) {
-		my $nb = $ip & $imask[$b];
+	for (my $bits = 32; $bits >= 0; $bits--) {
+		my $nb = $ip & $imask[$bits];
 		next unless exists $t->{$nb};
 		my $mb = imaxblock($nb, 32);
 		next if $done{$mb}++;
-		my $i = $b - $mb;
-		confess "$mb, $b, $ipquad, $nb" if ($i < 0 or $i > 32);
+		my $i = $bits - $mb;
+		confess "$mb, $bits, $ipquad, $nb" if ($i < 0 or $i > 32);
 		while ($i >= 0) {
 			return $t->{$nb}->[$i]
 				if defined $t->{$nb}->[$i];
@@ -332,13 +332,13 @@ sub findOuterNetblock
 		$mask = 32;
 	}
 
-	for (my $b = 0; $b <= $mask; $b++) {
-		my $nb = $ip & $imask[$b];;
+	for (my $bits = 0; $bits <= $mask; $bits++) {
+		my $nb = $ip & $imask[$bits];;
 		next unless exists $t->{$nb};
 		my $mb = imaxblock($nb, $mask);
-		my $i = $b - $mb;
-		confess "$mb, $b, $ipquad, $nb" if $i < 0;
-		confess "$mb, $b, $ipquad, $nb" if $i > 32;
+		my $i = $bits - $mb;
+		confess "$mb, $bits, $ipquad, $nb" if $i < 0;
+		confess "$mb, $bits, $ipquad, $nb" if $i > 32;
 		while ($i >= 0) {
 			return $t->{$nb}->[$i]
 				if defined $t->{$nb}->[$i];
@@ -356,14 +356,14 @@ sub findAllNetblock
 	my $ip = quad2int($ipquad);
 	my %done;
 
-	for (my $b = 32; $b >= 0; $b--) {
-		my $nb = $ip & $imask[$b];
+	for (my $bits = 32; $bits >= 0; $bits--) {
+		my $nb = $ip & $imask[$bits];
 		next unless exists $t->{$nb};
 		my $mb = imaxblock($nb, 32);
 		next if $done{$mb}++;
-		my $i = $b - $mb;
-		confess "$mb, $b, $ipquad, $nb" if $i < 0;
-		confess "$mb, $b, $ipquad, $nb" if $i > 32;
+		my $i = $bits - $mb;
+		confess "$mb, $bits, $ipquad, $nb" if $i < 0;
+		confess "$mb, $bits, $ipquad, $nb" if $i > 32;
 		while ($i >= 0) {
 			push(@ary,  $t->{$nb}->[$i])
 				if defined $t->{$nb}->[$i];
@@ -397,8 +397,8 @@ sub checkNetblock
 	my $base = $this->{'IBASE'};
 
 	my $mb = maxblock($this);
-	my $b = $this->{'BITS'};
-	my $i = $b - $mb;
+	my $bits = $this->{'BITS'};
+	my $i = $bits - $mb;
 
 	return defined $t->{$base}->[$i];
 }
