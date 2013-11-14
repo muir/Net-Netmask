@@ -10,7 +10,6 @@ WriteMakefile(
 	($] >= 5.005 
 		?	
 			(
-				ABSTRACT	=> 'Receive mail via SMTP',
 				ABSTRACT	=> 'Understand and manipulate IP netmaks',
 				AUTHOR		=> 'David Muir Sharnoff <cpan@dave.sharnoff.org>',
 				META_MERGE     => {
