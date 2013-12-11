@@ -180,7 +180,7 @@ Synonyms for ->B<base>() and ->B<broadcast>()
 =item ->B<match>($ip)
 
 Returns a true if the IP number $ip matches the given network. That
-is, a true value is returned if $ip is between base() amd broadcast().
+is, a true value is returned if $ip is between base() and broadcast().
 For example, if we have the network 192.168.1.0/24, then
 
   192.168.0.255 => 0
@@ -226,7 +226,7 @@ of 30 (as in a /30 network).
 Returns the nth element of the array that B<enumerate> would return
 if it were called.  So, to get the first usable address in a block,
 use B<nth>(1).  To get the broadcast address, use B<nth>(-1).  To
-get the last usable adress, use B<nth>(-2).
+get the last usable address, use B<nth>(-2).
 
 =item ->B<inaddr>()
 
@@ -340,7 +340,7 @@ The return value is a list of Net::Netmask objects.
 
 =head1 OVERLOADING
 
-Overloading doesn't seem to work completeley on perl before version
+Overloading doesn't seem to work completely on perl before version
 5.6.1.  The test suite doesn't test overloading before that.  At
 least for sort.
 
@@ -352,7 +352,7 @@ Strinification is overloaded to be the ->B<desc>() method.
 
 =item B<cmp>
 
-Numerical and string comparisions have been overloaded to 
+Numerical and string comparisons have been overloaded to 
 the ->B<cmpblocks>() method.  This allows blocks to be sorted
 without specifying a sort function.
 
@@ -406,7 +406,7 @@ Given a range of IP addresses, return a list of blocks that
 span that range.
 
 For example, range2cidrlist('216.240.32.128', '216.240.36.127'),
-will return a list of Net::Netmask objects that corrospond to:
+will return a list of Net::Netmask objects that correspond to:
 
 	216.240.32.128/25
 	216.240.33.0/24
@@ -417,7 +417,7 @@ will return a list of Net::Netmask objects that corrospond to:
 
 C<cidrs2contiglists> will rearrange a list of Net::Netmask objects
 such that contiguous sets are in sublists and each sublist is
-discontigeous with the next.
+discontiguous with the next.
 
 For example, given a list of Net::Netmask objects corresponding to
 the following blocks:
@@ -451,4 +451,3 @@ Copyright (C) 2011-2013 Google, Inc.
 
 This module may be used, modified and redistributed on the same
 terms as Perl itself.
-
