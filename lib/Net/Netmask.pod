@@ -226,7 +226,7 @@ of 30 (as in a /30 network).
 Returns the nth element of the array that B<enumerate> would return
 if it were called.  So, to get the first usable address in a block,
 use B<nth>(1).  To get the broadcast address, use B<nth>(-1).  To
-get the last usable adress, use B<nth>(-2).
+get the last usable address, use B<nth>(-2).
 
 =item ->B<inaddr>()
 

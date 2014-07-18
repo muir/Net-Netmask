@@ -187,7 +187,7 @@ METHODS
                              enumerate would return if it were called. So,
                              to get the first usable address in a block, use
                              nth(1). To get the broadcast address, use
-                             nth(-1). To get the last usable adress, use
+                             nth(-1). To get the last usable address, use
                              nth(-2).
 
     ->inaddr()               Returns an inline list of tuples. There is a

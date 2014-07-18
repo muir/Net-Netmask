@@ -3,7 +3,7 @@
 package Net::Netmask;
 
 use vars qw($VERSION);
-$VERSION = 1.9019;
+$VERSION = 1.9021;
 
 require Exporter;
 @ISA = qw(Exporter);
