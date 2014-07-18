@@ -1,9 +1,11 @@
 
 Revision history for Perl module Net::Netmask
 
+1.9021 2014-07-17
+
  - Spelling fix in documentation.
 
-1.9019 1013-10-01
+1.9019 2013-10-01
 
  - Rename $b to $bits so that netmask can be sorted.  Change mostly
    from https://rt.cpan.org/Ticket/Display.html?id=76939
