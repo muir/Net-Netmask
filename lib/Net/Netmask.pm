@@ -118,20 +118,20 @@ sub new
 
 	carp $error if $error && $debug;
 
-	$ibase = quad2int($base || 0) unless defined $ibase;
-	unless (defined($ibase) || defined($error)) {
-		$error = "could not parse $net";
-		$error .= " $mask" if $mask;
-	}
-	$ibase &= $imask[$bits]
-		if defined $ibase && defined $bits;
-
 	$bits = 0 unless $bits;
 	if ($bits > 32) { 
 		$error = "illegal number of bits: $bits"
 			unless $error;
 		$bits = 32;
 	}
+
+	$ibase = quad2int($base || 0) unless defined $ibase;
+	unless (defined($ibase) || defined($error)) {
+		$error = "could not parse $net";
+		$error .= " $mask" if $mask;
+	}
+	$ibase &= $imask[$bits]
+		if defined $ibase;
 
 	return bless { 
 		'IBASE' => $ibase,
