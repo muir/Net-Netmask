@@ -4,7 +4,7 @@ use Net::Netmask;
 use Net::Netmask qw(sameblock cmpblocks);
 use Carp;
 use Carp qw(verbose);
-use Test::More tests => 295;
+use Test::More tests => 304;
 
 #  addr			mask		base		newmask	     bits  mb
 my @rtests = qw(
@@ -93,7 +93,7 @@ $x = new Net::Netmask ('140.174.82.64/27');
 is(($x->inaddr())[1], 64);
 is(($x->inaddr())[2], 95);
 
-$x = new Net::Netmask ('default');
+$x = new Net::Netmask ('any');
 ok($x->size() == 4294967296);
 
 $x = new Net::Netmask ('209.157.64.0/27');
@@ -101,6 +101,10 @@ $x = new Net::Netmask ('209.157.64.0/27');
 is($y[0], '209.157.64.0');
 is($y[31], '209.157.64.31');
 ok(! defined($y[32]));
+@y = $x->enumerate(31);
+is($y[0], '209.157.64.0');
+is($y[15], '209.157.64.30');
+ok(! defined($y[16]));
 
 $x = new Net::Netmask ('10.2.0.16/19');
 @y = $x->enumerate();
@@ -157,6 +161,9 @@ is($newmask->nth(1),'192.168.1.1');
 is($newmask->nth(-1),'192.168.1.255');
 is($newmask->nth(-2),'192.168.1.254');
 is($newmask->nth(0),'192.168.1.0');
+is($newmask->nth(1,31),'192.168.1.2');
+is($newmask->nth(256),undef);
+is($newmask->nth(-257),undef);
 
 ok($newmask->match('192.168.1.1') == 1);
 ok($newmask->match('192.168.1.100') == 100);
@@ -241,6 +248,10 @@ sub fdel
 
 my (@c) = range2cidrlist("66.33.85.239", "66.33.85.240");
 my $dl = dlist(@c);
+ok($dl eq '66.33.85.239/32 66.33.85.240/32');
+
+(@c) = range2cidrlist("66.33.85.240", "66.33.85.239");
+$dl = dlist(@c);
 ok($dl eq '66.33.85.239/32 66.33.85.240/32');
 
 (@c) = range2cidrlist('216.240.32.128', '216.240.36.127');
@@ -589,6 +600,12 @@ ok(! defined(findNetblock("10.2.1.0", $table77)));
 	is("$obj2", '217.173.200.0/21');
 	ok(! $obj1->contains($obj2));
 	ok(! $obj2->contains($obj1));
+}
+
+{
+	my $obj1 = new2 Net::Netmask ('217.173.192.0/21');
+	ok($obj1->contains("217.173.192.0/24"));
+	ok(! $obj1->contains("217.173.200.0/21"));
 }
 
 {

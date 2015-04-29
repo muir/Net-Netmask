@@ -1,7 +1,7 @@
 #!/usr/bin/perl -I. -w
 
 use Net::Netmask;
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 #feel free to add a build requires of Test::Exception if that is okay with you.
 sub throws_ok(&$$) {
@@ -29,6 +29,11 @@ throws_ok
 	{ $cidr30->split(3) } 
 	qr/^Parts count must be a number of base 2. Got: 3/,
 	"Non base 2 split count errors.";
+
+throws_ok
+	{ $cidr30->split() }
+	qr/^Parts must be defined and greater than 0./,
+	"undef split throws error";
 
 throws_ok
 	{ $cidr30->split( 0 ) }
