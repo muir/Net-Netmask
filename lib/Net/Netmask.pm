@@ -74,7 +74,7 @@ sub new
 			$error = "illegal netmask: $mask";
 		}
 	} elsif (($net =~ m,^\d+\.\d+\.\d+\.\d+$,) &&
-		($mask =~ m,0x[a-z0-9]+,i)) 
+		($mask =~ m,0x[a-f0-9]+,i))
 	{
 		$base = $net;
 		my $imask = hex($mask);
