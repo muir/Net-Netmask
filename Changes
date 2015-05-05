@@ -1,6 +1,12 @@
 
 Revision history for Perl module Net::Netmask
 
+1.9022 2015-05-05
+
+ - Changes from adamherzog: minor cleanups plus
+ - A bunch of addtional tests
+ - A couple of small code fixes
+
 1.9021 2014-07-17
 
  - Spelling fix in documentation.
