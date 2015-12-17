@@ -7,8 +7,8 @@ WriteMakefile(
 	'DISTNAME' => 'Net-Netmask',
 	'VERSION_FROM' => 'lib/Net/Netmask.pm',
 	'dist'   => {COMPRESS=>'gzip', SUFFIX=>'gz'},
-	($] >= 5.005 
-		?	
+	($] >= 5.005
+		?
 			(
 				ABSTRACT	=> 'Understand and manipulate IP netmaks',
 				AUTHOR		=> 'David Muir Sharnoff <cpan@dave.sharnoff.org>',
@@ -17,9 +17,14 @@ WriteMakefile(
 						repository => 'http://github.com/muir/Net-Netmask',
 					},
 				},
-			) 
+			)
 		: ()
 	),
+    ($ExtUtils::MakeMaker::VERSION >= 6.48
+        ? (MIN_PERL_VERSION => 5.6.0)
+        : ()
+    ),
+    ($ExtUtils::MakeMaker::VERSION >= 6.3002 ? ('LICENSE'  => 'perl', ) : ())
 );
 
 package MY;
@@ -34,4 +39,3 @@ README: lib/Net/Netmask.pod
 
 END_OF_POSTAMBLE
 }
-
