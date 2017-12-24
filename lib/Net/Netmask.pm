@@ -464,7 +464,7 @@ sub irange2cidrlist
 	my @result;
 	while ($end >= $start) {
 		my $maxsize = imaxblock($start, 32);
-		my $maxdiff = 32 - floor(log($end - $start + 1)/log(2));
+		my $maxdiff = 32 - _log2($end - $start + 1);
 		$maxsize = $maxdiff if $maxsize < $maxdiff;
 		push (@result, bless {
 			'IBASE' => $start,
@@ -615,6 +615,18 @@ sub split
 		map { Net::Netmask->new( $_ . "/" .  $new_mask ) }
 			map { $self->nth( ( $num_ips / $parts ) * $_ ) } 
 				( 0 .. ( $parts - 1 ) );
+}
+
+# Implement log2 sub routine directly, to avoid precision problems with floor() 
+# problems with perls built with uselongdouble defined.
+# Credit: xenu, on IRC
+sub _log2 {
+   my $n = shift;
+   
+   my $ret = 0;
+   $ret++ while ($n >>= 1);
+   
+   return $ret;
 }
 
 BEGIN {
